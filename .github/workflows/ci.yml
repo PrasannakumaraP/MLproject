@@ -24,10 +24,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Linter
-        run: pylint train_model.py
+        run: pylint src/model.py src/test.py src/preprocess.py src/train.py
 
       - name: Run Tests
-        run: pytest test_model.py
+        run: pytest src/test.py
 
       - name: Deploy Model
         run: |
