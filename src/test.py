@@ -1,3 +1,10 @@
+"""
+Unit tests for the machine learning pipeline.
+
+This file contains test cases to validate data preprocessing,
+model training, and evaluation functions.
+"""
+
 import joblib
 from preprocess import load_data
 from model import evaluate_model
