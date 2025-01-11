@@ -18,3 +18,6 @@ def test_model_accuracy():
     accuracy = evaluate_model(model, x_test, y_test)
     print(f"Test Accuracy: {accuracy}")
     assert accuracy >= 0.75  # Assuming your model should have at least 75% accuracy
+
+if __name__ == "__main__":
+    test_model_accuracy()
