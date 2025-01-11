@@ -4,6 +4,7 @@ Module for training the model.
 
 from preprocess import load_data
 from model import train_model, evaluate_model
+import joblib
 
 DATA_PATH = "data/raw/sample_data.csv"  # Constant name updated to UPPER_CASE
 
@@ -14,5 +15,4 @@ if __name__ == "__main__":
     print(f"Model Accuracy: {accuracy}")
 
     # Save the model
-    import joblib
     joblib.dump(model, "models/model.pkl")
