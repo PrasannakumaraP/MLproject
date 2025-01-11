@@ -1,11 +1,15 @@
+"""
+Module for testing the model.
+"""
+
 import joblib
 from preprocess import load_data
 from model import evaluate_model
 
-data_path = "data/raw/sample_data.csv"
+DATA_PATH = "data/raw/sample_data.csv"  # Constant name updated to UPPER_CASE
 
 if __name__ == "__main__":
-    X_train, X_test, y_train, y_test = load_data(data_path)
+    x_train, x_test, y_train, y_test = load_data(DATA_PATH)
     model = joblib.load("models/model.pkl")
-    accuracy = evaluate_model(model, X_test, y_test)
+    accuracy = evaluate_model(model, x_test, y_test)
     print(f"Test Accuracy: {accuracy}")
