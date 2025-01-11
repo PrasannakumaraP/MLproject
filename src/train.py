@@ -2,9 +2,9 @@
 Module for training the model.
 """
 
-from preprocess import load_data
-from model import train_model, evaluate_model
-import joblib
+import joblib  # Third-party import
+from preprocess import load_data  # First-party import
+from model import train_model, evaluate_model  # First-party import
 
 DATA_PATH = "data/raw/sample_data.csv"  # Constant name updated to UPPER_CASE
 
