@@ -2,12 +2,12 @@
 Module for defining and training the model.
 """
 
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 def train_model(x_train, y_train):
-    """Train the Logistic Regression model."""
-    model = LogisticRegression()
+    """Train the Random Forest model."""
+    model = RandomForestClassifier()
     model.fit(x_train, y_train)
     return model
 
