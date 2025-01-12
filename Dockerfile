@@ -1,17 +1,24 @@
-# Base image
+# Use a base image with Python
 FROM python:3.9-slim
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy application code and requirements
-COPY . /app
+# Copy requirements file and install dependencies
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies
-RUN pip install -r requirements.txt
+# Copy the training script into the container
+COPY train.py ./
 
-# Expose the application port
+# Run the training script to generate the model
+RUN python train.py
+
+# Copy the application code into the container
+COPY app.py ./
+
+# Expose the application port (e.g., 5000 for Flask)
 EXPOSE 5000
 
-# Run the application
+# Set the command to run the application
 CMD ["python", "app.py"]
