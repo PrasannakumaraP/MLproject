@@ -4,7 +4,7 @@ Module for testing the model.
 import joblib
 import pytest
 from preprocess import load_data
-from model import evaluate_model
+from model_j import evaluate_model
 
 DATA_PATH = "data/raw/temps.csv"  # Constant name updated to UPPER_CASE
 
