@@ -1,31 +1,31 @@
 """
 Module for defining and training the model.
 """
-import numpy as np
+import pickle  # Standard import placed at the top
+import numpy as np  # Third-party imports
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from joblib import dump
 from preprocess import load_data
-import pickle
 
 # Train Model
-def train_model(x_train, y_train):
+def train_model(train_x, train_y):
     """Train the model."""
     model = RandomForestRegressor(n_estimators=1000, random_state=42, max_depth=3)
-    model.fit(x_train, y_train)
+    model.fit(train_x, train_y)
     return model
 
 # Evaluate model
-def evaluate_model(model, x_test, y_test):
+def evaluate_model(model, test_x, test_y):
     """Evaluate the model using accuracy."""
-    predictions = model.predict(x_test)
+    predictions = model.predict(test_x)
     # Calculate the absolute errors
-    errors = abs(predictions - y_test)
+    errors = abs(predictions - test_y)
     # Print out the mean absolute error (mae)
     print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
     # Calculate mean absolute percentage error (MAPE)
-    mape = 100 * (errors / y_test)
-    mse = mean_squared_error(y_test, predictions)
+    mape = 100 * (errors / test_y)
+    mse = mean_squared_error(test_y, predictions)
     rmse = mse ** 0.5
     print(f"Mean Squared Error: {mse}")
     print(f"Root Mean Squared Error: {rmse}")
