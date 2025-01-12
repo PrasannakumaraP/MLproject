@@ -18,6 +18,6 @@ def test_model_accuracy():
     accuracy = evaluate_model(model, x_test, y_test)
     # Assert the accuracy is above a certain threshold
     assert accuracy >= 0.7, "Model accuracy is below the expected threshold"
-"""Test directly in script """
+
 if __name__ == "__main__":
     pytest.main()  # Run pytest when executing the script directly
