@@ -1,12 +1,12 @@
 """
 Module for defining and training the model.
 """
-import pickle
-from joblib import dump
-from preprocess import load_data
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
+from joblib import dump
+from preprocess import load_data
+import pickle
 
 # Train Model
 def train_model(x_train, y_train):
