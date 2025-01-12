@@ -10,18 +10,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the training script into the container
 COPY src/train.py ./
+# Copy the data directory into the container
+COPY data ./data  # This will copy the entire data directory
 
 # Run the training script to generate the model
 RUN python train.py
 
-# Copy the model file into the container (assuming it's generated in the previous step)
-COPY models/model.pkl ./models/model.pkl
+# Copy the application code (if any) into the container
+COPY src/app.py ./
 
-# Copy the application code into the container
-COPY app.py ./
-
-# Expose the application port (e.g., 5000 for Flask)
-EXPOSE 5000
-
-# Set the command to run the application
+# Set the command to run the application (modify as needed)
 CMD ["python", "app.py"]
