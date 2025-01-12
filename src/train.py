@@ -22,7 +22,7 @@ def evaluate_model(model_instance, test_x, test_y):
     # Calculate the absolute errors
     errors = abs(predictions - test_y)
     # Print out the mean absolute error (mae)
-    print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+    print('Mean Absolute Error:-', round(np.mean(errors), 2), 'degrees.')
     # Calculate mean absolute percentage error (MAPE)
     mape = 100 * (errors / test_y)
     mse = mean_squared_error(test_y, predictions)
