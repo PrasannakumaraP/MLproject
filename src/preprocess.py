@@ -1,26 +1,33 @@
 """
 Module for data preprocessing.
 """
-
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder
 
 def load_data(path):
-    """Load data from the specified path and split into train/test sets."""
+    """Load and preprocess data, ensuring all features are numeric."""
     data = pd.read_csv(path)
-    x = data.drop(columns=['id', 'purchase'])  # Adjust as needed
-    y = data['purchase']  # Target variable
+    print(data.head())
 
-    # One-hot encode categorical variables
-    column_transformer = ColumnTransformer(
-        transformers=[
-            ('onehot', OneHotEncoder(drop='first'), ['education_level', 'marital_status'])
-        ],
-        remainder='passthrough'  # Keep other columns as is
-    )
+    features = pd.get_dummies(data)
+    features.head(5)
+    
+    X= features.drop('actual', axis = 1) # axis 1 refers to the columns
+    names = list(X.columns)
+    X = np.array(X)
+    y = np.array(features['actual'])
 
-    x_transformed = column_transformer.fit_transform(x)
+    print("\nFeatures and Target:")
+    print(X[:5])
+    print(y[:5])
 
-    return train_test_split(x_transformed, y, test_size=0.2, random_state=42)
+    # Split into train and test sets
+    return train_test_split(X, y, test_size=0.25, random_state=42)
+
+# Debugging function call
+try:
+    x_train, x_test, y_train, y_test = load_data("temps.csv")
+    print("\nData loaded successfully!")
+except Exception as e:
+    print(f"Error: {e}")
