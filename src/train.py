@@ -2,6 +2,7 @@
 Module for training the model.
 """
 import pickle
+from joblib import dump
 from preprocess import load_data
 from model import train_model, evaluate_model
 
@@ -18,3 +19,5 @@ if __name__ == "__main__":
     # Save the model using pickle
     with open('models/model.pkl', 'wb') as model_file:
         pickle.dump(model, model_file)
+    # Save the model using Joblib
+    dump(model, 'models/model_j.joblib')
