@@ -9,15 +9,16 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the training script into the container
-COPY src/train.py ./
+COPY src/train.py ./  # Copying train.py from the src directory
+
 # Copy the data directory into the container
 COPY data ./data  # This will copy the entire data directory
+
+# Copy the application code into the container (app.py is in the same folder as Dockerfile)
+COPY app.py ./  # Make sure the path to app.py is correct
 
 # Run the training script to generate the model
 RUN python train.py
 
-# Copy the application code (if any) into the container
-COPY src/app.py ./
-
-# Set the command to run the application (modify as needed)
+# Set the command to run the application
 CMD ["python", "app.py"]
