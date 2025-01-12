@@ -1,7 +1,6 @@
 """
 Module for training the model.
 """
-import joblib
 import pickle
 from preprocess import load_data
 from model import train_model, evaluate_model
