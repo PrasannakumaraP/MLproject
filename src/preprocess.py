@@ -23,7 +23,7 @@ def load_data(path):
 
 # Debugging function call
 try:
-    x_train, x_test, y_train, y_test = load_data("temps.csv")
+    x_train, x_test, y_train, y_test = load_data("data/raw/temps.csv")
     print("\nData loaded successfully!")
 except FileNotFoundError as e:
     print(f"File not found: {e}")

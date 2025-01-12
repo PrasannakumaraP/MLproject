@@ -6,7 +6,7 @@ import pytest
 from preprocess import load_data
 from model import evaluate_model
 
-DATA_PATH = "temps.csv"  # Constant name updated to UPPER_CASE
+DATA_PATH = "data/raw/temps.csv"  # Constant name updated to UPPER_CASE
 
 def test_model_accuracy():
     """Test the accuracy of the loaded model."""
