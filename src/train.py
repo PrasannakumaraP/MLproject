@@ -11,14 +11,14 @@ from preprocess import load_data
 # Train Model
 def train_model(train_x, train_y):
     """Train the model."""
-    model = RandomForestRegressor(n_estimators=1000, random_state=42, max_depth=3)
-    model.fit(train_x, train_y)
-    return model
+    model_instance = RandomForestRegressor(n_estimators=1000, random_state=42, max_depth=3)
+    model_instance.fit(train_x, train_y)
+    return model_instance
 
 # Evaluate model
-def evaluate_model(model, test_x, test_y):
+def evaluate_model(model_instance, test_x, test_y):
     """Evaluate the model using accuracy."""
-    predictions = model.predict(test_x)
+    predictions = model_instance.predict(test_x)
     # Calculate the absolute errors
     errors = abs(predictions - test_y)
     # Print out the mean absolute error (mae)
@@ -30,9 +30,9 @@ def evaluate_model(model, test_x, test_y):
     print(f"Mean Squared Error: {mse}")
     print(f"Root Mean Squared Error: {rmse}")
     # Calculate accuracy
-    accuracy = 100 - np.mean(mape)
-    print('Accuracy:', round(accuracy, 2), '%.')
-    return accuracy
+    accuracy_value = 100 - np.mean(mape)
+    print('Accuracy:', round(accuracy_value, 2), '%.')
+    return accuracy_value
 
 """
 Model Store.
