@@ -9,7 +9,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the training script into the container
-COPY train.py ./
+COPY src/train.py ./
 
 # Run the training script to generate the model
 RUN python train.py
