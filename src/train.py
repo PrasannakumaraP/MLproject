@@ -34,12 +34,9 @@ def evaluate_model(model_instance, test_x, test_y):
     print('Accuracy:', round(accuracy_value, 2), '%.')
     return accuracy_value
 
-"""
-Model Store.
-"""
-DATA_PATH = "data/raw/temps.csv"  # Constant name updated to UPPER_CASE
-
+# Main execution block
 if __name__ == "__main__":
+    DATA_PATH = "data/raw/temps.csv"  # Constant name updated to UPPER_CASE
     x_train, x_test, y_train, y_test = load_data(DATA_PATH)
 
     model = train_model(x_train, y_train)
