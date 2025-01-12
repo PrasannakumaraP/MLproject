@@ -3,8 +3,7 @@ Module for testing the model.
 """
 import joblib
 import pytest
-from preprocess import load_data
-from train import evaluate_model  # Importing evaluate_model from train.py
+from train import evaluate_model, load_data  # Importing evaluate_model from train.py
 
 DATA_PATH = "data/raw/temps.csv"  # Constant name updated to UPPER_CASE
 
