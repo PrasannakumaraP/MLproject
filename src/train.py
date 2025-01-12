@@ -4,7 +4,6 @@ Module for defining and training the model.
 import pickle
 from joblib import dump
 from preprocess import load_data
-from model import train_model, evaluate_model
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
@@ -12,11 +11,11 @@ from sklearn.metrics import mean_squared_error
 # Train Model
 def train_model(x_train, y_train):
     """Train the model."""
-    model = RandomForestRegressor(n_estimators = 1000, random_state = 42, max_depth = 3)
+    model = RandomForestRegressor(n_estimators=1000, random_state=42, max_depth=3)
     model.fit(x_train, y_train)
     return model
 
-# Evaluate model"""
+# Evaluate model
 def evaluate_model(model, x_test, y_test):
     """Evaluate the model using accuracy."""
     predictions = model.predict(x_test)
@@ -48,8 +47,6 @@ if __name__ == "__main__":
     print(f"Model Accuracy: {accuracy}")
 
     # Save the model
-    # Save the model using pickle
     with open('models/model.pkl', 'wb') as model_file:
         pickle.dump(model, model_file)
-    # Save the model using Joblib
     dump(model, 'models/model_j.joblib')
