@@ -2,13 +2,25 @@
 Module for testing the model.
 """
 import joblib
+import pytest
 from preprocess import load_data
 from model import evaluate_model
 
 DATA_PATH = "temps.csv"  # Constant name updated to UPPER_CASE
 
-if __name__ == "__main__":
+def test_model_accuracy():
+    """Test the accuracy of the loaded model."""
+    # Load the data
     x_train, x_test, y_train, y_test = load_data(DATA_PATH)
+    
+    # Load the trained model
     model = joblib.load("model.pkl")
+    
+    # Evaluate the model
     accuracy = evaluate_model(model, x_test, y_test)
-    print(f"Test Accuracy: {accuracy}")
+    
+    # Assert the accuracy is above a certain threshold
+    assert accuracy >= 0.7, "Model accuracy is below the expected threshold"
+
+if __name__ == "__main__":
+    pytest.main()  # Run pytest when executing the script directly
