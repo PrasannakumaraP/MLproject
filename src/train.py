@@ -4,6 +4,7 @@ Module for defining and training the model.
 import pickle  # Standard import placed at the top
 import numpy as np  # Third-party imports
 import pandas as pd
+from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from joblib import dump
