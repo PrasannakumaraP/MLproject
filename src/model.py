@@ -4,15 +4,15 @@ Module for defining and training the model.
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
-""" Train Model
+# Train Model
 def train_model(x_train, y_train):
-    """Train the Random Forest model."""
     model = RandomForestRegressor(n_estimators = 1000, random_state = 42, max_depth = 3)
     model.fit(x_train, y_train)
     return model
-""" Evaluate model
+
+# Evaluate model"""
 def evaluate_model(model, x_test, y_test):
-    """Evaluate the model using accuracy."""
+    #Evaluate the model using accuracy."""
     predictions = model.predict(x_test)
     
     # Calculate the absolute errors

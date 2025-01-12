@@ -1,7 +1,6 @@
 """
 Module for testing the model.
 """
-
 import joblib
 from preprocess import load_data
 from model import evaluate_model

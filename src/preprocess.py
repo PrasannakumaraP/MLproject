@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 def load_data(path):
-    """Load and preprocess data, ensuring all features are numeric."""
+    #Load and preprocess data, ensuring all features are numeric.
     data = pd.read_csv(path)
     print(data.head())
 

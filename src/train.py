@@ -5,7 +5,6 @@ import joblib
 from preprocess import load_data
 from model import train_model, evaluate_model
 
-
 DATA_PATH = "temps.csv"  # Constant name updated to UPPER_CASE
 
 if __name__ == "__main__":
