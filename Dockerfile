@@ -14,6 +14,9 @@ COPY train.py ./
 # Run the training script to generate the model
 RUN python train.py
 
+# Copy the model file into the container (assuming it's generated in the previous step)
+COPY models/model.pkl ./models/model.pkl
+
 # Copy the application code into the container
 COPY app.py ./
 
