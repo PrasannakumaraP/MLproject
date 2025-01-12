@@ -25,7 +25,7 @@ jobs:
           pip install pylint pytest  # Install pylint and pytest
 
       - name: Run Linter
-        run: pylint src/model.py src/test.py src/preprocess.py src/train.py
+        run: pylint src/preprocess.py src/model.py src/train.py src/test.py
 
       - name: Run Tests
         run: pytest src/test.py
