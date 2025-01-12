@@ -18,4 +18,4 @@ if __name__ == "__main__":
     # Save the model
     # Save the model using pickle
     with open('models/model.pkl', 'wb') as model_file:
-    pickle.dump(model, model_file)
+        pickle.dump(model, model_file)
