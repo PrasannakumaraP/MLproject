@@ -14,7 +14,7 @@ def test_model_accuracy():
     _, x_test, _, y_test = load_data(DATA_PATH)
 
     # Load the trained model
-    model = joblib.load("model.pkl")
+    model = joblib.load("models/model.pkl")
 
     # Evaluate the model
     accuracy = evaluate_model(model, x_test, y_test)
