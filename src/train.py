@@ -2,6 +2,7 @@
 Module for training the model.
 """
 import joblib
+import pickle
 from preprocess import load_data
 from model import train_model, evaluate_model
 
@@ -15,4 +16,6 @@ if __name__ == "__main__":
     print(f"Model Accuracy: {accuracy}")
 
     # Save the model
-    joblib.dump(model, "model.pkl")
+    # Save the model using pickle
+    with open('models/model.pkl', 'wb') as model_file:
+    pickle.dump(model, model_file)
