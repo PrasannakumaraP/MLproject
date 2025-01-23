@@ -1,6 +1,7 @@
 """
 Module for defining and training the model.
 """
+import os
 import pickle  # Standard import placed at the top
 import numpy as np  # Third-party imports
 import pandas as pd
