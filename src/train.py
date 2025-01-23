@@ -72,9 +72,7 @@ def evaluate_model(model_instance, test_x, test_y):
     return accuracy_value
 
 if __name__ == "__main__":
-    """
-    Main script to load data, train the model, evaluate it, and save the trained model.
-    """
+    # Main script to load data, train the model, evaluate it, and save the trained model.
     DATA_PATH = "data/raw/temps.csv"
     x_train, x_test, y_train, y_test = load_data(DATA_PATH)
 
