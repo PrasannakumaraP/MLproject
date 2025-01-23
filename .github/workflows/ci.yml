@@ -29,6 +29,9 @@ jobs:
 
       - name: Run Tests
         run: pytest src/test.py
+
+      - name: Train Model
+        run: python src/train.py  # This step will save the model in the models folder
         
       - name: Debug Build Context
         run: |
