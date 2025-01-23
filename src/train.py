@@ -62,6 +62,9 @@ if __name__ == "__main__":
     accuracy = evaluate_model(model, x_test, y_test)
     print(f"Model Accuracy: {accuracy}")
 
+    # Ensure models directory exists
+    os.makedirs('models', exist_ok=True)  # Use os to create the models directory if it does not exist
+    
     # Save the model
     with open('models/model.pkl', 'wb') as model_file:
         pickle.dump(model, model_file)
