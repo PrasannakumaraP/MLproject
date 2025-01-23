@@ -5,19 +5,19 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY requirements.txt ./
+COPY requirements.txt /app/
 
 # Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire data directory into the container (Ensure data is in the build context)
-COPY ./data/raw ./data  # Adjusted to reflect the correct path within the build context
+# Copy the raw data folder into the container
+COPY data/raw /app/data/raw
 
-# Copy the training script from the src directory
-COPY ./src/train.py ./ 
+# Copy the training script into the container
+COPY src/train.py /app/train.py
 
-# Copy the application code into the container (app.py is in the same folder as Dockerfile)
-COPY ./app.py ./ 
+# Copy the application script into the container
+COPY app.py /app/app.py
 
 # Set the command to run the training script
-CMD ["python", "train.py"]
+CMD ["python", "/app/train.py"]
