@@ -29,10 +29,13 @@ jobs:
 
       - name: Run Tests
         run: pytest src/test.py
-      - name: Debug Directory Structure
-        run: ls -R
+        
+      - name: Debug Build Context
+        run: |
+          echo "Debugging build context:"
+          ls -R
         
       - name: Deploy Model
         run: |
-          docker build -t my-ml-model .
+          docker build --no-cache -t my-ml-model .
           docker run -p 5000:5000 my-ml-model
