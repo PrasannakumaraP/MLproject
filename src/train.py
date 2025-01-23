@@ -1,3 +1,9 @@
+"""
+Module for defining, training, and evaluating a Random Forest model.
+This module loads data, preprocesses it, trains a model, evaluates its performance,
+and saves the trained model to the 'models' directory.
+"""
+
 import os
 import pickle
 import numpy as np
@@ -7,8 +13,16 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from joblib import dump
 
-# Load data and preprocess
 def load_data(path):
+    """
+    Load data from a CSV file, preprocess it, and split into training and testing sets.
+
+    Args:
+        path (str): The file path to the CSV data file.
+
+    Returns:
+        tuple: Four NumPy arrays: train_x, test_x, train_y, test_y
+    """
     data = pd.read_csv(path)
     print(data.head())
 
@@ -18,14 +32,33 @@ def load_data(path):
     y_label = np.array(features['actual'])
     return train_test_split(x_label, y_label, test_size=0.25, random_state=42)
 
-# Train Model
 def train_model(train_x, train_y):
+    """
+    Train a Random Forest Regressor model using the provided training data.
+
+    Args:
+        train_x (np.ndarray): Training feature set.
+        train_y (np.ndarray): Training labels.
+
+    Returns:
+        RandomForestRegressor: Trained Random Forest model.
+    """
     model_instance = RandomForestRegressor(n_estimators=1000, random_state=42, max_depth=3)
     model_instance.fit(train_x, train_y)
     return model_instance
 
-# Evaluate model
 def evaluate_model(model_instance, test_x, test_y):
+    """
+    Evaluate the trained model using test data and print performance metrics.
+
+    Args:
+        model_instance (RandomForestRegressor): Trained model to evaluate.
+        test_x (np.ndarray): Test feature set.
+        test_y (np.ndarray): Test labels.
+
+    Returns:
+        float: Accuracy of the model.
+    """
     predictions = model_instance.predict(test_x)
     errors = abs(predictions - test_y)
     print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
@@ -38,8 +71,10 @@ def evaluate_model(model_instance, test_x, test_y):
     print('Accuracy:', round(accuracy_value, 2), '%.')
     return accuracy_value
 
-# Main execution block
 if __name__ == "__main__":
+    """
+    Main script to load data, train the model, evaluate it, and save the trained model.
+    """
     DATA_PATH = "data/raw/temps.csv"
     x_train, x_test, y_train, y_test = load_data(DATA_PATH)
 
