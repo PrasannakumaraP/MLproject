@@ -29,7 +29,9 @@ jobs:
 
       - name: Run Tests
         run: pytest src/test.py
-
+      - name: Debug Directory Structure
+        run: ls -R
+        
       - name: Deploy Model
         run: |
           docker build -t my-ml-model .
