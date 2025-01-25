@@ -23,6 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint pytest  # Install pylint and pytest
+      
+      - name: Check installed packages
+       run: |
+          pip list | grep mlflow  # Check if mlflow is installed
 
       - name: Run Linter
         run: pylint src/train.py src/test.py

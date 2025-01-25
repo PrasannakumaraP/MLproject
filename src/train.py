@@ -49,8 +49,8 @@ def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
     model_instance.fit(train_x, train_y)
 
     # Evaluate the trained model for Experiment tracking using MLflow
-    accuracy = accuracy_score(y_test_lbl, model_instance.predict(x_test_lbl))
-    print(f"Model accuracy: {accuracy}")
+    accuracy_traking = accuracy_score(y_test_lbl, model_instance.predict(x_test_lbl))
+    print(f"Model accuracy: {accuracy_traking}")
 
     # Start MLflow logging
     mlflow.start_run()
@@ -60,7 +60,7 @@ def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
     mlflow.log_param("random_state", 42)
 
     # Log metrics
-    mlflow.log_metric("accuracy", accuracy)
+    mlflow.log_metric("accuracy", accuracy_traking)
 
     # Log the trained model
     mlflow.sklearn.log_model(model_instance, "model")
