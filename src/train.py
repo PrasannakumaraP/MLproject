@@ -8,6 +8,8 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
+import mlflow
+import mlflow.sklearn  # For scikit-learn models
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
@@ -32,7 +34,7 @@ def load_data(path):
     y_label = np.array(features['actual'])
     return train_test_split(x_label, y_label, test_size=0.25, random_state=42)
 
-def train_model(train_x, train_y):
+def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
     """
     Train a Random Forest Regressor model using the provided training data.
 
@@ -45,6 +47,26 @@ def train_model(train_x, train_y):
     """
     model_instance = RandomForestRegressor(n_estimators=1000, random_state=42, max_depth=3)
     model_instance.fit(train_x, train_y)
+
+    # Evaluate the trained model for Experiment tracking using MLflow
+    accuracy = accuracy_score(y_test_lbl, model_instance.predict(x_test_lbl))
+    print(f"Model accuracy: {accuracy}")
+
+    # Start MLflow logging
+    mlflow.start_run()
+
+    # Log hyperparameters
+    mlflow.log_param("n_estimators", 1000)
+    mlflow.log_param("random_state", 42)
+
+    # Log metrics
+    mlflow.log_metric("accuracy", accuracy)
+
+    # Log the trained model
+    mlflow.sklearn.log_model(model_instance, "model")
+
+    # End MLflow run
+    mlflow.end_run()
     return model_instance
 
 def evaluate_model(model_instance, test_x, test_y):
@@ -76,7 +98,7 @@ if __name__ == "__main__":
     DATA_PATH = "data/raw/temps.csv"
     x_train, x_test, y_train, y_test = load_data(DATA_PATH)
 
-    model = train_model(x_train, y_train)
+    model = train_model(x_train, y_train,x_test,y_test)
     accuracy = evaluate_model(model, x_test, y_test)
     print(f"Model Accuracy: {accuracy}")
 

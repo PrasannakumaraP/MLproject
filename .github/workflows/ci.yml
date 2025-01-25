@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: MLOps CI/CD Pipeline
 
 on:
   push:
@@ -32,13 +32,17 @@ jobs:
 
       - name: Train Model
         run: python src/train.py  # This step will save the model in the models folder
-        
+
       - name: Debug Build Context
         run: |
           echo "Debugging build context:"
           ls -R
         
+        - name: Log Model with MLflow
+        run: |
+          mlflow run src/ --experiment-name "my_experiment" --run-name "run_$(date +%Y%m%d%H%M%S)"
+        
       - name: Deploy Model
         run: |
-          docker build --no-cache -t my-ml-model .
+          docker build -t my-ml-model .
           docker run -p 5000:5000 my-ml-model
