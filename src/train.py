@@ -8,9 +8,11 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
+import mlflow
+import mlflow.sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error,accuracy_score
 from joblib import dump
 
 def load_data(path):
@@ -45,6 +47,26 @@ def train_model(train_x, train_y):
     """
     model_instance = RandomForestRegressor(n_estimators=1000, random_state=42, max_depth=3)
     model_instance.fit(train_x, train_y)
+ 
+    # Evaluate the trained model for Experiment tracking using MLflow
+    accuracy = accuracy_score(y_test_lbl, model_instance.predict(x_test_lbl))
+    print(f"Model accuracy: {accuracy}")
+
+    # Start MLflow logging
+    mlflow.start_run()
+
+    # Log hyperparameters
+    mlflow.log_param("n_estimators", 1000)
+    mlflow.log_param("random_state", 42)
+
+    # Log metrics
+    mlflow.log_metric("accuracy", accuracy)
+
+    # Log the trained model
+    mlflow.sklearn.log_model(model_instance, "model")
+
+    # End MLflow run
+    mlflow.end_run()
     return model_instance
 
 def evaluate_model(model_instance, test_x, test_y):
