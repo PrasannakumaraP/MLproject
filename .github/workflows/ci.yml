@@ -37,11 +37,11 @@ jobs:
         run: |
           echo "Debugging build context:"
           ls -R
-        
-        - name: Log Model with MLflow
+  
+      - name: Log Model with MLflow
         run: |
           mlflow run src/ --experiment-name "my_experiment" --run-name "run_$(date +%Y%m%d%H%M%S)"
-        
+   
       - name: Deploy Model
         run: |
           docker build -t my-ml-model .
