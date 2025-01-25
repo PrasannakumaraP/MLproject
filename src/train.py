@@ -48,7 +48,16 @@ def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
     model_instance.fit(train_x, train_y)
 
     # Evaluate the trained model for Experiment tracking using MLflow
-    accuracy_traking = accuracy_score(y_test_lbl, model_instance.predict(x_test_lbl))
+    pred_res = model_instance.predict(x_test_lbl)
+
+    errors = abs(pred_res - y_test_lbl)
+    print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+    mape = 100 * (errors / y_test_lbl)
+    mse = mean_squared_error(y_test_lbl, pred_res)
+    rmse = mse ** 0.5
+    print(f"Mean Squared Error: {mse}")
+    print(f"Root Mean Squared Error: {rmse}")
+    accuracy_traking = 100 - np.mean(mape)
     print(f"Model accuracy: {accuracy_traking}")
 
     # Start MLflow logging
