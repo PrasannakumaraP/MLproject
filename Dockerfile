@@ -19,5 +19,8 @@ COPY src/train.py /app/train.py
 # Copy the application script into the container
 COPY app.py /app/app.py
 
+# Expose the app's port
+EXPOSE 5000
+
 # Set the command to run the training script
 CMD ["python", "/app/train.py"]
