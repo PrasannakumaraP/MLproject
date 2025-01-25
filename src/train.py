@@ -15,6 +15,19 @@ from joblib import dump
 import mlflow
 import mlflow.sklearn
 
+# Provide an example input as a dictionary or a DataFrame
+input_example = pd.DataFrame({
+    'year': [2016],
+    'month': [1],
+    'day': [1],
+    'week': ['Fri'],
+    # ... add other necessary fields with example values
+    'forecast_noaa': [43],
+    'forecast_acc': [50],
+    'forecast_under': [44],
+    'friend': [29]
+})
+
 def load_data(path):
     """
     Load data from a CSV file, preprocess it, and split into training and testing sets.
@@ -50,7 +63,6 @@ def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
 
     # Evaluate the trained model for Experiment tracking using MLflow
     pred_res = model_instance.predict(x_test_lbl)
-    input_example = ...  # Provide an example input as a dictionary or a DataFrame
 
     errors = abs(pred_res - y_test_lbl)
     print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
