@@ -2,4 +2,4 @@ name: MyMLProject
 
 entry_points:
   main:
-    command: "python src/train_and_track.py"
+    command: "python src/train.py"
