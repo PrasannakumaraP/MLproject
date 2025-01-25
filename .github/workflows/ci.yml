@@ -42,9 +42,16 @@ jobs:
           echo "Debugging build context:"
           ls -R
 
-      - name: Log Model with MLflow
+      - name: Create Virtual Environment
         run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
           mlflow run . --experiment-name "my_experiment" --run-name "run_$(date +%Y%m%d%H%M%S)"
+      
+      - name: Debug Environment Variables
+        run: env
 
       - name: Deploy Model
         run: |
