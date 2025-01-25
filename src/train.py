@@ -12,7 +12,7 @@ import mlflow
 import mlflow.sklearn  # For scikit-learn models
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error,accuracy_score
 from joblib import dump
 
 def load_data(path):
