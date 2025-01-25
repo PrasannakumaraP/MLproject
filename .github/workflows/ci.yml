@@ -44,6 +44,8 @@ jobs:
 
       - name: Log Model with MLflow
         run: |
+          pwd                 # Print the current working directory
+          ls -la             # Check if MLproject exists at this level
           mlflow run . --experiment-name "my_experiment" --run-name "run_$(date +%Y%m%d%H%M%S)"
 
       - name: Deploy Model
