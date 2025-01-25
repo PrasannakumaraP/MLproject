@@ -18,42 +18,46 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Create and Activate Virtual Environment
         run: |
+          python -m venv venv
+          source venv/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint pytest  # Install pylint and pytest
 
       - name: Check installed packages
         run: |
+          source venv/bin/activate
           pip list | grep mlflow  # Check if mlflow is installed
 
       - name: Run Linter
-        run: pylint src/train.py src/test.py
+        run: |
+          source venv/bin/activate
+          pylint src/train.py src/test.py
 
       - name: Run Tests
-        run: pytest src/test.py
+        run: |
+          source venv/bin/activate
+          pytest src/test.py
 
       - name: Train Model
-        run: python src/train.py  # This step will save the model in the models folder
+        run: |
+          source venv/bin/activate
+          python src/train.py  # This step will save the model in the models folder
 
       - name: Debug Build Context
         run: |
           echo "Debugging build context:"
           ls -R
 
-      - name: Create Virtual Environment
+      - name: Log Model with MLflow
         run: |
-          python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
           mlflow run . --experiment-name "my_experiment" --run-name "run_$(date +%Y%m%d%H%M%S)"
-      
-      - name: Debug Environment Variables
-        run: env
 
       - name: Deploy Model
         run: |
+          source venv/bin/activate
           docker build -t my-ml-model .
           docker run -p 5000:5000 my-ml-model
