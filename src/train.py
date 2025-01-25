@@ -8,13 +8,13 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
+import mlflow
+from mlflow import sklearn  # For scikit-learn models
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error,accuracy_score
 from joblib import dump
-import mlflow
-from mlflow import sklearn  # For scikit-learn models
- 
+
 def load_data(path):
     """
     Load data from a CSV file, preprocess it, and split into training and testing sets.
@@ -53,20 +53,20 @@ def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
     print(f"Model accuracy: {accuracy_traking}")
 
     # Start MLflow logging
-    mlflow.start_run()
+    mlflow.start_run() # pylint: disable=E1101
 
     # Log hyperparameters
-    mlflow.log_param("n_estimators", 1000)
-    mlflow.log_param("random_state", 42)
+    mlflow.log_param("n_estimators", 1000) # pylint: disable=E1101
+    mlflow.log_param("random_state", 42)   # pylint: disable=E1101
 
     # Log metrics
-    mlflow.log_metric("accuracy", accuracy_traking)
+    mlflow.log_metric("accuracy", accuracy_traking)  # pylint: disable=E1101
 
     # Log the trained model
-    mlflow.sklearn.log_model(model_instance, "model")
+    mlflow.sklearn.log_model(model_instance, "model") # pylint: disable=E1101
 
     # End MLflow run
-    mlflow.end_run()
+    mlflow.end_run() # pylint: disable=E1101
     return model_instance
 
 def evaluate_model(model_instance, test_x, test_y):
