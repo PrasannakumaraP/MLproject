@@ -10,6 +10,7 @@ pytest
 joblib==1.3.2
 flask
 flask run
+mlflow
 
 
 python model.py
