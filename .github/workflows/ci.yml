@@ -54,7 +54,7 @@ jobs:
       - name: Log Model with MLflow
         run: |
           source venv/bin/activate
-          mlflow run . --experiment-name "my_experiment" --run-name "run_$(date +%Y%m%d%H%M%S)" --no-conda
+          mlflow run . --experiment-name "my_experiment" --run-name "run_$(date +%Y%m%d%H%M%S)" --env-manager=local
 
       - name: Deploy Model
         run: |
