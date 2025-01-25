@@ -13,6 +13,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from joblib import dump
 import mlflow
+import mlflow.sklearn
 
 def load_data(path):
     """
@@ -49,6 +50,7 @@ def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
 
     # Evaluate the trained model for Experiment tracking using MLflow
     pred_res = model_instance.predict(x_test_lbl)
+    input_example = ...  # Provide an example input as a dictionary or a DataFrame
 
     errors = abs(pred_res - y_test_lbl)
     print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
@@ -71,7 +73,8 @@ def train_model(train_x, train_y, x_test_lbl, y_test_lbl):
     mlflow.log_metric("accuracy", accuracy_traking)  # pylint: disable=E1101
 
     # Log the trained model
-    mlflow.sklearn.log_model(model_instance, "model") # pylint: disable=E1101
+    #mlflow.sklearn.log_model(model_instance, "model") # pylint: disable=E1101
+    mlflow.sklearn.log_model(model_instance, "model", input_example=input_example) # pylint: disable=E1101
 
     # End MLflow run
     mlflow.end_run() # pylint: disable=E1101
